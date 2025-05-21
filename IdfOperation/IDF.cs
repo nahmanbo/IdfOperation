@@ -14,7 +14,7 @@ namespace IdfOperation
 
         public override void PrintInfo()
         {
-            Console.WriteLine($"IDF - Commander: {CurrentCommander}, Established: {EstablishmentDate.ToShortDateString()}");
+            Console.WriteLine($"IDF - Commander: {GetCommander()}, Established: {EstablishmentDate.ToShortDateString()}");
             Console.WriteLine($"Firepower Units: {Firepower.GetStrikeCount()}");
             Console.WriteLine($"Intel Messages: {Intelligence.GetIntelCount()}");
         }
