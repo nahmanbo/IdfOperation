@@ -1,4 +1,4 @@
-namespace IdfOperation
+/*namespace IdfOperation
 {
     public class IDF : Organization
     {
@@ -6,7 +6,7 @@ namespace IdfOperation
         public IntelligenceDivision Intelligence { get; private set; }
 
         public IDF(DateTime establishmentDate, string currentCommander)
-            : base(establishmentDate, currentCommander)
+            : base(new DateTime(1948, 5, 31), currentCommander)
         {
             Firepower = new FirepowerDivision();
             Intelligence = new IntelligenceDivision();
@@ -19,4 +19,4 @@ namespace IdfOperation
             Console.WriteLine($"Intel Messages: {Intelligence.GetIntelCount()}");
         }
     }
-}
+}*/
