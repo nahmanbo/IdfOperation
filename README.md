@@ -2,7 +2,7 @@
 Repo Manager:Nachman Ben Or
 First Contributor:Yoel Ider
 
-IDF Operation – First Strike: Organization Structure
+IDF Operation ï¿½ First Strike: Organization Structure
 Hierarchy
 
 Organization: Top-level entity (e.g., IDF, Hamas), implemented via IOrganization.
@@ -127,7 +127,7 @@ M109 Artillery (IStrikeUnit)
 Properties:
 Ammo: 40 strikes.
 Targets: OpenArea.
-Features: Hits 2–3 targets at once, no fuel.
+Features: Hits 2ï¿½3 targets at once, no fuel.
 
 
 
