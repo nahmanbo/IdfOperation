@@ -1,25 +1,28 @@
-using System;
-
-namespace IdfOperation
+public abstract class Organization
 {
-    public abstract class Organization
-    {
-        private string _currentCommander;
-        public DateTime EstablishmentDate { get; }
+    private readonly DateTime _establishmentDate;
+    private string _currentCommander;
 
-        protected Organization(DateTime establishmentDate, string currentCommander)
-        {
-            EstablishmentDate = establishmentDate;
-            _currentCommander = currentCommander;
-        }
-        public string GetCommander()
-        {
-            return _currentCommander;
-        }
-        public void ChangeCommander(string newCommander)
-        {
-            _currentCommander = newCommander;
-        } 
-        public abstract void PrintInfo();
+    protected Organization(DateTime establishmentDate, string currentCommander)
+    {
+        _establishmentDate = establishmentDate;
+        _currentCommander = currentCommander;
     }
+
+    public DateTime GetEstablishmentDate()
+    {
+        return _establishmentDate;
+    }
+
+    public string GetCommander()
+    {
+        return _currentCommander;
+    }
+
+    public void ChangeCommander(string newCommander)
+    {
+        _currentCommander = newCommander;
+    }
+
+    public abstract void PrintInfo();
 }
