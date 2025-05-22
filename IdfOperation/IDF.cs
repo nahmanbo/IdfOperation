@@ -21,7 +21,7 @@ namespace IdfOperation
             Firepower.PrintInfo();
 
             Console.WriteLine("=== Intelligence Division ===");
-            //Intelligence.PrintInfo();
+            Intelligence.PrintAllReports();
         }
     }
 }

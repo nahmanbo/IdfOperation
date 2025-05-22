@@ -10,11 +10,17 @@ namespace IdfOperation
         }
         public void LessFuel()
         {
-            _fuel = Math.Max(0, _fuel - 5); // מונע ירידה מתחת ל-0
+            _fuel = Math.Max(0, _fuel - 5); 
         }
         public override void PrintInfo()
         {
             Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
+        }
+
+        public override void Attack(float count)
+        {
+            LessFuel();
+            UseAmmo(count);
         }
     }
 }

@@ -15,8 +15,6 @@ public abstract class Weapon
     {
         return _targetType;
     }
-
-
     public void UseAmmo(float count)
     {
         if (count < 0 || count > this._maxAmmo)
@@ -32,14 +30,5 @@ public abstract class Weapon
         _ammo += count;
     }
     public abstract void PrintInfo();
-    
-
-
-
-
-
-
-
-
-
+    public abstract void Attack(float count);
 }

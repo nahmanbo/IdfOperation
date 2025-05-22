@@ -16,5 +16,10 @@ namespace IdfOperation
         {
             Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
         }
+        public override void Attack(float count)
+        {
+            LessFuel();
+            UseAmmo(count);
+        }
     }
 }
