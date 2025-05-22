@@ -1,25 +1,41 @@
-using System.Collections.Generic;
-
-namespace IdfOperation
+public abstract class Weapon
 {
-    public class Weapon
+    protected string _name { get; }
+    protected float _ammo { get; set; }
+    protected int _maxAmmo { get; }
+   
+    protected List<string> _targetType { get; }
+
+    public Weapon(string name, float ammo, List<string> effective, int _maxAmmo)
     {
-        private List<global::Weapon> _strikeUnits;
-        public Weapon()
-        {
-            _strikeUnits = new List<global::Weapon>();
-        } 
-        public void AddStrikeUnit(global::Weapon unit)
-        {
-            _strikeUnits.Add(unit);
-        } 
-        public IReadOnlyList<global::Weapon> GetStrikeUnits()
-        {
-            return _strikeUnits.AsReadOnly();
-        } 
-        public int GetStrikeCount()
-        {
-            return _strikeUnits.Count;
-        }
+        this._name = name;
+        this._ammo = ammo;
+        this._targetType = effective; 
     }
+    public void UseAmmo(float count)
+    {
+        if (count < 0 || count > this._maxAmmo)
+        {
+            Console.WriteLine("The quantity is invalid.");
+            return;
+        }
+        Console.WriteLine("");
+        this._ammo -= count;
+    }
+    public  void UpdateAmmo(float count)
+    {
+        _ammo += count;
+    }
+
+    public abstract void PrintInfo();
+    
+
+
+
+
+
+
+
+
+
 }

@@ -1,6 +1,14 @@
-﻿interface IFuelable
-{ 
-    int fuel { get; } 
-    public void lessFuel(int count);
-    public void addFuel();
+﻿namespace IdfOperation
+{
+    interface IFuelable
+    {
+
+        private int fuel { get => fuel; set => fuel = value; }
+
+
+        public void lessFuel();
+
+        public void addFuel();
+
+    }
 }

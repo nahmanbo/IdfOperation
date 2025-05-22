@@ -14,7 +14,6 @@ namespace IdfOperation
         {
             return _terrorists.AsReadOnly();
         }
-
         public void AddTerrorist(Terrorist terrorist)
         { 
             _terrorists.Add(terrorist);
