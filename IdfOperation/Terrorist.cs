@@ -22,37 +22,48 @@ namespace IdfOperation
         {
             string status = IsAlive ? "Alive" : "Dead";
             string weaponList = Weapons.Count > 0 ? string.Join(", ", Weapons) : "Unarmed";
-
             Console.WriteLine($"Terrorist: {Name} | Rank: {Rank} | Status: {status} | Weapons: {weaponList}");
-        }
-
-        public int CalculateQualityScore()
-        {
-            int weaponPoints = 0;
-
-            foreach (var weapon in Weapons)
-            {
-                switch (weapon.ToLower())
-                {
-                    case "knife":
-                        weaponPoints += 1;
-                        break;
-                    case "gun":
-                        weaponPoints += 2;
-                        break;
-                    case "m16":
-                    case "ak47":
-                        weaponPoints += 3;
-                        break;
-                }
-            }
-
-            return Rank * weaponPoints;
         }
 
         public void Kill()
         {
             IsAlive = false;
+        }
+    }
+
+    public static class TerroristGenerator
+    {
+        private static readonly List<string> names = new()
+        {
+            "Ahmed Yassin", "Mohammed Deif", "Khaled Mashal", "Ismail Haniyeh",
+            "Marwan Issa", "Salah Shehade", "Yahya Sinwar", "Ibrahim Abu al-Naja"
+        };
+
+        private static readonly List<string> weapons = new()
+        {
+            "Knife", "Gun", "M16", "AK47"
+        };
+
+        private static readonly Random rnd = new();
+
+        public static List<Terrorist> Generate(int count)
+        {
+            var list = new List<Terrorist>();
+
+            for (int i = 0; i < count; i++)
+            {
+                string name = names[rnd.Next(names.Count)] + $" #{i + 1}";
+                int rank = rnd.Next(1, 6);
+
+                int weaponCount = rnd.Next(1, 4);
+                var shuffled = new List<string>(weapons);
+                shuffled.Sort((a, b) => rnd.Next(-1, 2));
+                var selectedWeapons = shuffled.GetRange(0, weaponCount);
+
+                list.Add(new Terrorist(name, rank, selectedWeapons));
+            }
+
+            return list;
         }
     }
 }
