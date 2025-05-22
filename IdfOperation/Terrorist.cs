@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-
 namespace IdfOperation
-{
+{ 
     public class Terrorist
     {
         public string Name { get; set; }

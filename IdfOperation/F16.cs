@@ -1,24 +1,20 @@
-namespace IdfOperation;
-
-public class F16 : Weapon , IFuelable
+namespace IdfOperation
 {
-    private int _fuel= 100;
-    public F16()
-        :base("F16", 8, [ "buildings" ],8) {}
-
-    public  void lessFuel()
+    public class F16 : Weapon, IFuelable
     {
-        this._fuel -=5 ;
+        private int _fuel = 100; 
+        public F16(int number) : base($"F16-{number}", 8, new List<string> { "buildings" }, 8) {}
+        public void AddFuel()
+        {
+            _fuel = 100;
+        } 
+        public void LessFuel()
+        {
+            _fuel = Math.Max(0, _fuel - 5);
+        }
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
+        }
     }
-    public void addFuel()
-    {
-        this._fuel = 100;
-
-    }
-
-    public override void PrintInfo()
-    {
-        Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
-    }
-
 }

@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-
 namespace IdfOperation
-{ 
-    public class Hamas : Organization
+{ public class Hamas : Organization
     {
         private readonly List<Terrorist> _terrorists;
         public Hamas(string currentCommander) : base(new DateTime(1987, 12, 14), currentCommander) 

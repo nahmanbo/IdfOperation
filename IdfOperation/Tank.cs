@@ -1,21 +1,20 @@
-namespace IdfOperation;
-
-public class Tank : Weapon, IFuelable
+namespace IdfOperation
 {
-    private int _fuel = 100;
-    public Tank()
-        : base("Tank", 3, ["open areas"], 40) { }
-
-    public void lessFuel()
+    public class Tank : Weapon, IFuelable
     {
-        this._fuel -= 5;
-    }
-    public void addFuel()
-    {
-        this._fuel = 100;
-    }
-    public override void PrintInfo()
-    {
-        Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
+        private int _fuel = 100; 
+        public Tank(int number) : base($"Tank-{number}", 40, new List<string> { "open areas" }, 40) {} 
+        public void LessFuel()
+        {
+            _fuel = Math.Max(0, _fuel - 5);
+        }
+        public void AddFuel()
+        {
+            _fuel = 100;
+        } 
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel}%");
+        }
     }
 }
