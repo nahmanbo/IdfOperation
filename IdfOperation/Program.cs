@@ -8,5 +8,8 @@ class Program
         hamas.PrintInfo();
         hamas.ChangeCommander("Mohammed Deif");
         hamas.PrintInfo();
+
+        
+
     }
 }

@@ -1,9 +1,10 @@
 ﻿interface IFuelable
 {
 
-    int fuel { get; }
+   private int fuel { get => fuel; set => fuel = value; }
 
-    public void lessFuel(int count);
+
+    public void lessFuel();
    
     public void addFuel();
 
