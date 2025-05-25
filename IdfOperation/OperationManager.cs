@@ -27,8 +27,9 @@ namespace IdfOperation
                 Console.WriteLine("6. View most dangerous terrorist report");
                 Console.WriteLine("7. Eliminate terrorist by name");
                 Console.WriteLine("8. Eliminate the most dangerous terrorist");
-                Console.WriteLine("9. Exit");
-                Console.Write("Enter your choice (1-9): ");
+                Console.WriteLine("9. Eliminate terrorists by target type");
+                Console.WriteLine("10. Exit");
+                Console.Write("Enter your choice (1-10): ");
 
                 string choice = Console.ReadLine()?.Trim() ?? "";
 
@@ -67,6 +68,10 @@ namespace IdfOperation
                         break;
 
                     case "9":
+                        EliminateByTargetType();
+                        break;
+
+                    case "10":
                         Console.WriteLine("Exiting program...");
                         return;
 
@@ -78,7 +83,7 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public void PrintReportByTerroristName()
+        private void PrintReportByTerroristName()
         {
             Console.Write("Enter terrorist name: ");
             string name = Console.ReadLine()?.Trim() ?? "";
@@ -94,7 +99,7 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public void PrintMostDangerousTerroristReport()
+        private void PrintMostDangerousTerroristReport()
         {
             var report = _idf.Intelligence.GetMostDangerousAliveReport();
             if (report == null)
@@ -119,21 +124,7 @@ namespace IdfOperation
                 return;
             }
 
-            var terrorist = report.GetTerrorist();
-            if (!terrorist.IsAlive)
-            {
-                Console.WriteLine($"{name} is already dead.");
-                return;
-            }
-
-            var weapon = _idf.Firepower.FindAvailableWeaponFor(report.GetLastKnownLocation());
-            if (weapon == null)
-            {
-                Console.WriteLine($"No weapon available for target type: {report.GetLastKnownLocation()}");
-                return;
-            }
-
-            weapon.AttackTarget(terrorist, 1);
+            TryEliminate(report.GetTerrorist(), report.GetLastKnownLocation());
         }
 
         //--------------------------------------------------------------
@@ -146,21 +137,51 @@ namespace IdfOperation
                 return;
             }
 
-            var terrorist = report.GetTerrorist();
-            if (!terrorist.IsAlive)
+            TryEliminate(report.GetTerrorist(), report.GetLastKnownLocation());
+        }
+
+        //--------------------------------------------------------------
+        private void EliminateByTargetType()
+        {
+            Console.Write("Enter target type name: ");
+            string targetType = Console.ReadLine()?.Trim() ?? "";
+
+            bool anyEliminated = false;
+
+            foreach (var report in _idf.Intelligence.GetReports())
             {
-                Console.WriteLine($"Most dangerous terrorist ({terrorist.Name}) is already dead.");
-                return;
+                var terrorist = report.GetTerrorist();
+
+                if (report.GetLastKnownLocation() == targetType && TryEliminate(terrorist, targetType))
+                {
+                    anyEliminated = true;
+                }
             }
 
-            var weapon = _idf.Firepower.FindAvailableWeaponFor(report.GetLastKnownLocation());
+            if (!anyEliminated)
+            {
+                Console.WriteLine($"No eligible terrorists found for target type: {targetType}");
+            }
+        }
+
+        //--------------------------------------------------------------
+        private bool TryEliminate(Terrorist terrorist, string targetType)
+        {
+            if (!terrorist.IsAlive)
+            {
+                Console.WriteLine($"{terrorist.Name} is already dead.");
+                return false;
+            }
+
+            var weapon = _idf.Firepower.FindAvailableWeaponFor(targetType);
             if (weapon == null)
             {
-                Console.WriteLine($"No weapon available for target type: {report.GetLastKnownLocation()}");
-                return;
+                Console.WriteLine($"No weapon available for target type: {targetType}");
+                return false;
             }
 
             weapon.AttackTarget(terrorist, 1);
+            return true;
         }
     }
 }
