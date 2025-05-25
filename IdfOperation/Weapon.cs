@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using IdfOperation;
-
 namespace IdfOperation
 {
     public abstract class Weapon
@@ -11,7 +7,7 @@ namespace IdfOperation
         protected int _maxAmmo { get; }
         protected List<string> _targetType { get; }
 
-        //--------------------------------------------------------------
+        //==============================================================
         protected Weapon(string name, float ammo, List<string> effective, int maxAmmo)
         {
             _name = name;
@@ -34,7 +30,6 @@ namespace IdfOperation
                 Console.WriteLine("The quantity is invalid.");
                 return;
             }
-
             _ammo -= count;
         }
 
@@ -43,11 +38,12 @@ namespace IdfOperation
         {
             _ammo += count;
         }
+
+        //--------------------------------------------------------------
         public float GetAmmo()
         {
             return _ammo;
         }
-
 
         //--------------------------------------------------------------
         public abstract void PrintInfo();
@@ -60,6 +56,7 @@ namespace IdfOperation
                 Console.WriteLine($"{terrorist.Name} is already dead.");
                 return;
             }
+
             UseAmmo(ammoToUse);
 
             if (this is IFuelable fuelable)

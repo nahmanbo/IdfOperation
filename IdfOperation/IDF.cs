@@ -1,7 +1,5 @@
-using System;
-
 namespace IdfOperation
-{
+{ 
     public class IDF : Organization
     {
         public FirepowerDivision Firepower { get; private set; }
@@ -12,8 +10,7 @@ namespace IdfOperation
         {
             Firepower = new FirepowerDivision();
             Intelligence = new IntelligenceDivision();
-        }
-
+        } 
         public override void PrintInfo()
         {
             Console.WriteLine($"IDF - Commander: {GetCommander()}, Established: {GetEstablishmentDate().ToShortDateString()}");

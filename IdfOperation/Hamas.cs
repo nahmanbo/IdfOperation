@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-
 namespace IdfOperation
 {
     public class Hamas : Organization
     {
-        private static Hamas? _instance; 
-
-        private readonly List<Terrorist> _terrorists;
-
+        private static Hamas? _instance;
+        private readonly List<Terrorist> _terrorists; 
         public static Hamas Instance
         {
             get
@@ -22,18 +17,15 @@ namespace IdfOperation
         {
             _instance = this;
             _terrorists = TerroristGenerator.Generate(10);
-        }
-
+        } 
         public IReadOnlyList<Terrorist> GetTerrorists()
         {
             return _terrorists.AsReadOnly();
         }
-
         public void AddTerrorist(Terrorist terrorist)
         {
             _terrorists.Add(terrorist);
         }
-
         public override void PrintInfo()
         {
             Console.WriteLine($"Hamas - Commander: {GetCommander()}, Established: {GetEstablishmentDate().ToShortDateString()}");
