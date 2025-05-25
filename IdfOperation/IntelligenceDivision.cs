@@ -32,35 +32,41 @@ namespace IdfOperation
             return _reports.AsReadOnly();
         }
 
-        //--------------------------------------------------------------
-        public IntelligenceReport GetMostDangerousTerrorist()
-        { 
-            IntelligenceReport mostDangerous = _reports[0];
+//--------------------------------------------------------------
+        public IntelligenceReport? GetMostDangerousAliveReport()
+        {
+            IntelligenceReport? mostDangerous = null;
 
             foreach (var report in _reports)
             {
-                if (report.GetThreatLevel() > mostDangerous.GetThreatLevel())
+                var terrorist = report.GetTerrorist();
+
+                if (!terrorist.IsAlive)
+                    continue;
+
+                if (mostDangerous == null || report.GetThreatLevel() > mostDangerous.GetThreatLevel())
+                {
                     mostDangerous = report;
+                }
             }
 
             return mostDangerous;
         }
+        
         //--------------------------------------------------------------
-        public IntelligenceReport GetTerroristByName(string name)
+        public IntelligenceReport? GetReportByTerroristName(string name)
         {
-            IntelligenceReport ByName = null;
-
-            foreach(var report in _reports)
+            foreach (var report in _reports)
             {
                 if (string.Equals(report.GetTerrorist().Name, name, StringComparison.OrdinalIgnoreCase))
                 {
-                    ByName = report;
-                    break;
+                    return report;
                 }
-
             }
-            return ByName;
+
+            return null;
         }
+
         //--------------------------------------------------------------
         public void PrintInfo()
         {

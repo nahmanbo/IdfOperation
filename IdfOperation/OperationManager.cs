@@ -51,11 +51,11 @@ namespace IdfOperation
                         break;
 
                     case "5":
-                        _idf.Intelligence.GetMostDangerousTerrorist().PrintInfo();
+                        _idf.Intelligence.GetMostDangerousAliveReport().PrintInfo();
                         break;
 
                     case "6":
-                        _idf.Intelligence.GetMostDangerousTerrorist().PrintInfo();
+                        _idf.Intelligence.GetMostDangerousAliveReport().PrintInfo();
                         break;
 
                     case "7":
@@ -81,7 +81,7 @@ namespace IdfOperation
         //--------------------------------------------------------------
         private void EliminateMostDangerous()
         {
-            var report = _idf.Intelligence.GetMostDangerousTerrorist();
+            var report = _idf.Intelligence.GetMostDangerousAliveReport();
             if (report == null)
             {
                 Console.WriteLine("No intelligence reports available.");
