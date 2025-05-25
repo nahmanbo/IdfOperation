@@ -2,7 +2,7 @@
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
         Hamas hamas = new Hamas("Yahya Sinwar");
         Idf idf = new Idf("Eyal Zamir");
@@ -18,8 +18,7 @@ class Program
             Console.Write("Enter your choice (1-5): ");
 
             string choice = Console.ReadLine();
-            Console.WriteLine(); // spacing
-
+            
             switch (choice)
             {
                 case "1":
