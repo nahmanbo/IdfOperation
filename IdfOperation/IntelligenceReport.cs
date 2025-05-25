@@ -11,9 +11,9 @@ namespace IdfOperation
         public IntelligenceReport(Terrorist terrorist, string lastKnownLocation, DateTime reportTime)
         {
             _terrorist = terrorist;
+            _threatLevel = CalculateThreatScore();
             _lastKnownLocation = lastKnownLocation;
             _reportTime = reportTime;
-            _threatLevel = CalculateThreatScore();
         }
 
         //--------------------------------------------------------------
@@ -33,17 +33,7 @@ namespace IdfOperation
 
             return _terrorist.Rank * weaponScore;
         }
-
-        //--------------------------------------------------------------
-        public void UpdateTerrorist(Terrorist newTerrorist)
-        {
-            if (newTerrorist == null)
-                throw new ArgumentNullException(nameof(newTerrorist));
-
-            _terrorist = newTerrorist;
-            _threatLevel = CalculateThreatScore();
-        }
-
+        
         //--------------------------------------------------------------
         public void UpdateLastKnownLocation(string newLocation)
         {
@@ -51,6 +41,7 @@ namespace IdfOperation
                 throw new ArgumentException("Location cannot be empty.");
 
             _lastKnownLocation = newLocation;
+            UpdateReportTime(DateTime.Now);
         }
 
         //--------------------------------------------------------------

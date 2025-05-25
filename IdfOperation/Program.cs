@@ -41,13 +41,6 @@ class Program
                 case "6":
                 {
                     var report = idf.Intelligence.GetMostDangerousTerrorist();
-
-                    if (report == null)
-                    {
-                        Console.WriteLine("No intelligence reports available.");
-                        break;
-                    }
-
                     var terrorist = report.GetTerrorist();
 
                     if (!terrorist.IsAlive)
@@ -57,7 +50,7 @@ class Program
                     }
 
                     string targetType = report.GetLastKnownLocation();
-                    var weapon = idf.Firepower.GetAvailableWeaponForTarget(targetType);
+                    var weapon = idf.Firepower.FindAvailableWeaponFor(targetType);
 
                     if (weapon == null)
                     {

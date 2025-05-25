@@ -52,12 +52,6 @@ namespace IdfOperation
         //--------------------------------------------------------------
         public void AttackTarget(Terrorist terrorist, float ammoToUse)
         {
-            if (!terrorist.IsAlive)
-            {
-                Console.WriteLine($"{terrorist.Name} is already dead.");
-                return;
-            }
-
             UseAmmo(ammoToUse);
 
             if (this is IFuelable fuelable)

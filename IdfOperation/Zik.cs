@@ -25,7 +25,7 @@ namespace IdfOperation
         {
             return _fuel;
         }
-
+        
         //--------------------------------------------------------------
         public override void PrintInfo()
         {

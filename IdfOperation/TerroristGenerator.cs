@@ -26,7 +26,7 @@ namespace IdfOperation
             {
                 string name = Names[Rnd.Next(0, Names.Count)];
                 int rank = Rnd.Next(1, 6);
-                int weaponCount = Rnd.Next(1, 4);
+                int weaponCount = Rnd.Next(1, 5);
 
                 List<string> selectedWeapons = new List<string>();
 

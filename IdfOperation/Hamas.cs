@@ -13,7 +13,7 @@ namespace IdfOperation
             : base(new DateTime(1987, 12, 14), currentCommander)
         {
             _instance = this;
-            _terrorists = TerroristGenerator.Generate(10);
+            _terrorists = TerroristGenerator.Generate(15);
         }
 
         //--------------------------------------------------------------

@@ -20,7 +20,7 @@ namespace IdfOperation
             for (int i = 0; i < count; i++)
             {
                 var f16 = new F16(i + 1);
-                AddWeaponToTargets(f16);
+                MapWeaponToTargets(f16);
             }
         }
 
@@ -30,7 +30,7 @@ namespace IdfOperation
             for (int i = 0; i < count; i++)
             {
                 var zik = new Zik(i + 1);
-                AddWeaponToTargets(zik);
+                MapWeaponToTargets(zik);
             }
         }
 
@@ -40,12 +40,12 @@ namespace IdfOperation
             for (int i = 0; i < count; i++)
             {
                 var tank = new Tank(i + 1);
-                AddWeaponToTargets(tank);
+                MapWeaponToTargets(tank);
             }
         }
 
         //--------------------------------------------------------------
-        private void AddWeaponToTargets(Weapon weapon)
+        private void MapWeaponToTargets(Weapon weapon)
         {
             foreach (var target in weapon.GetTargetTypes())
             {
@@ -59,13 +59,13 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public IReadOnlyDictionary<string, List<Weapon>> GetWeaponsByTarget()
+        public IReadOnlyDictionary<string, List<Weapon>> GetAllWeaponsByTarget()
         {
             return _weaponsByTarget;
         }
 
         //--------------------------------------------------------------
-        public Weapon? GetAvailableWeaponForTarget(string targetType)
+        public Weapon? FindAvailableWeaponFor(string targetType)
         {
             if (!_weaponsByTarget.ContainsKey(targetType))
                 return null;
