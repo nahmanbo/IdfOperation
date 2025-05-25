@@ -33,19 +33,24 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public IntelligenceReport GetMostDangerousTerrorist()
-        { 
-            IntelligenceReport mostDangerous = _reports[0];
+        public IntelligenceReport? GetMostDangerousTerrorist()
+        {
+            IntelligenceReport? mostDangerous = null;
 
             foreach (var report in _reports)
             {
-                if (report.GetThreatLevel() > mostDangerous.GetThreatLevel())
+                var terrorist = report.GetTerrorist();
+
+                if (!terrorist.IsAlive)
+                    continue;
+
+                if (mostDangerous == null || report.GetThreatLevel() > mostDangerous.GetThreatLevel()) 
                     mostDangerous = report;
             }
 
             return mostDangerous;
         }
-
+        
         //--------------------------------------------------------------
         public void PrintInfo()
         {
