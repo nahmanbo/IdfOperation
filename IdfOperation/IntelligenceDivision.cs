@@ -45,7 +45,22 @@ namespace IdfOperation
 
             return mostDangerous;
         }
+        //--------------------------------------------------------------
+        public IntelligenceReport GetTerroristByName(string name)
+        {
+            IntelligenceReport ByName = null;
 
+            foreach(var report in _reports)
+            {
+                if (string.Equals(report.GetTerrorist().Name, name, StringComparison.OrdinalIgnoreCase))
+                {
+                    ByName = report;
+                    break;
+                }
+
+            }
+            return ByName;
+        }
         //--------------------------------------------------------------
         public void PrintInfo()
         {
