@@ -58,7 +58,9 @@ namespace IdfOperation
         {
             foreach (var report in _reports)
             {
-                if (string.Equals(report.GetTerrorist().Name, name, StringComparison.OrdinalIgnoreCase))
+                var terrorist = report.GetTerrorist();
+
+                if (string.Equals(terrorist.Name, name, StringComparison.OrdinalIgnoreCase) && terrorist.IsAlive)
                 {
                     return report;
                 }

@@ -23,8 +23,8 @@ namespace IdfOperation
                 Console.WriteLine("2. View full Hamas information");
                 Console.WriteLine("3. View Firepower Division data");
                 Console.WriteLine("4. View Intelligence Division reports");
-                Console.WriteLine("5. View most dangerous terrorist report");
-                Console.WriteLine("6. View all terrorist reports sorted by threat level");
+                Console.WriteLine("5. View terrorist report by name");
+                Console.WriteLine("6. View most dangerous terrorist report");
                 Console.WriteLine("7. Eliminate terrorist by name");
                 Console.WriteLine("8. Eliminate the most dangerous terrorist");
                 Console.WriteLine("9. Exit");
@@ -51,15 +51,15 @@ namespace IdfOperation
                         break;
 
                     case "5":
-                        _idf.Intelligence.GetMostDangerousAliveReport().PrintInfo();
+                        PrintReportByTerroristName();
                         break;
 
                     case "6":
-                        _idf.Intelligence.GetMostDangerousAliveReport().PrintInfo();
+                        PrintMostDangerousTerroristReport();
                         break;
 
                     case "7":
-                        //EliminateByName();
+                        EliminateByName();
                         break;
 
                     case "8":
@@ -76,7 +76,65 @@ namespace IdfOperation
                 }
             }
         }
-        
+
+        //--------------------------------------------------------------
+        public void PrintReportByTerroristName()
+        {
+            Console.Write("Enter terrorist name: ");
+            string name = Console.ReadLine()?.Trim();
+
+            var report = _idf.Intelligence.GetReportByTerroristName(name);
+            if (report == null)
+            {
+                Console.WriteLine($"No report found for terrorist: {name}");
+                return;
+            }
+
+            report.PrintInfo();
+        }
+
+        //--------------------------------------------------------------
+        public void PrintMostDangerousTerroristReport()
+        {
+            var report = _idf.Intelligence.GetMostDangerousAliveReport();
+            if (report == null)
+            {
+                Console.WriteLine("No alive terrorist reports available.");
+                return;
+            }
+
+            report.PrintInfo();
+        }
+
+        //--------------------------------------------------------------
+        private void EliminateByName()
+        {
+            Console.Write("Enter the name of the terrorist to eliminate: ");
+            string name = Console.ReadLine()?.Trim();
+
+            var report = _idf.Intelligence.GetReportByTerroristName(name);
+            if (report == null)
+            {
+                Console.WriteLine($"No intelligence report found for terrorist: {name}");
+                return;
+            }
+
+            var terrorist = report.GetTerrorist();
+            if (!terrorist.IsAlive)
+            {
+                Console.WriteLine($"{name} is already dead.");
+                return;
+            }
+
+            var weapon = _idf.Firepower.FindAvailableWeaponFor(report.GetLastKnownLocation());
+            if (weapon == null)
+            {
+                Console.WriteLine($"No weapon available for target type: {report.GetLastKnownLocation()}");
+                return;
+            }
+
+            weapon.AttackTarget(terrorist, 1);
+        }
 
         //--------------------------------------------------------------
         private void EliminateMostDangerous()
@@ -84,12 +142,11 @@ namespace IdfOperation
             var report = _idf.Intelligence.GetMostDangerousAliveReport();
             if (report == null)
             {
-                Console.WriteLine("No intelligence reports available.");
+                Console.WriteLine("No alive intelligence reports available.");
                 return;
             }
 
             var terrorist = report.GetTerrorist();
-
             if (!terrorist.IsAlive)
             {
                 Console.WriteLine($"Most dangerous terrorist ({terrorist.Name}) is already dead.");
@@ -99,7 +156,7 @@ namespace IdfOperation
             var weapon = _idf.Firepower.FindAvailableWeaponFor(report.GetLastKnownLocation());
             if (weapon == null)
             {
-                Console.WriteLine($"No available weapon for target type: {report.GetLastKnownLocation()}");
+                Console.WriteLine($"No weapon available for target type: {report.GetLastKnownLocation()}");
                 return;
             }
 
