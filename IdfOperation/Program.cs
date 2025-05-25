@@ -1,10 +1,11 @@
 ﻿namespace IdfOperation; 
+
 class Program
 {
     static void Main(string[] args)
     {
         Hamas hamas = new Hamas("Yahya Sinwar");
-        IDF idf = new IDF("Eyal Zamir");
+        Idf idf = new Idf("Eyal Zamir");
 
         while (true)
         {
@@ -31,11 +32,12 @@ class Program
                     idf.Firepower.PrintInfo();
                     break;
                 case "4":
-                    idf.Intelligence.PrintAllReports();
+                    idf.Intelligence.PrintInfo();
                     break;
                 case "5":
                     Console.WriteLine("Exiting program...");
                     return;
+
                 case "6":
                 {
                     var report = idf.Intelligence.GetMostDangerousTerrorist();
@@ -46,13 +48,15 @@ class Program
                         break;
                     }
 
-                    if (!report.Target.IsAlive)
+                    var terrorist = report.GetTerrorist();
+
+                    if (!terrorist.IsAlive)
                     {
-                        Console.WriteLine($"Most dangerous terrorist ({report.Target.Name}) is already dead.");
+                        Console.WriteLine($"Most dangerous terrorist ({terrorist.Name}) is already dead.");
                         break;
                     }
 
-                    string targetType = report.LastKnownLocation;
+                    string targetType = report.GetLastKnownLocation();
                     var weapon = idf.Firepower.GetAvailableWeaponForTarget(targetType);
 
                     if (weapon == null)
@@ -61,9 +65,10 @@ class Program
                         break;
                     }
 
-                    weapon.AttackTarget(report.Target, 1);
+                    weapon.AttackTarget(terrorist, 1);
                     break;
                 }
+
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
                     break;

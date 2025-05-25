@@ -1,33 +1,36 @@
-public abstract class Organization
+namespace IdfOperation
 {
-    private readonly DateTime _establishmentDate;
-    private string _currentCommander;
-
-    //====================================
-    protected Organization(DateTime establishmentDate, string currentCommander)
+    public abstract class Organization
     {
-        _establishmentDate = establishmentDate;
-        _currentCommander = currentCommander;
-    }
+        private readonly DateTime _establishmentDate;
+        private string _currentCommander;
 
-    //--------------------------------------------------------------
-    public DateTime GetEstablishmentDate()
-    {
-        return _establishmentDate;
-    }
+        //====================================
+        protected Organization(DateTime establishmentDate, string currentCommander)
+        {
+            _establishmentDate = establishmentDate;
+            _currentCommander = currentCommander;
+        }
 
-    //--------------------------------------------------------------
-    public string GetCommander()
-    {
-        return _currentCommander;
-    }
+        //--------------------------------------------------------------
+        public DateTime GetEstablishmentDate()
+        {
+            return _establishmentDate;
+        }
 
-    //--------------------------------------------------------------
-    public void ChangeCommander(string newCommander)
-    {
-        _currentCommander = newCommander;
-    }
+        //--------------------------------------------------------------
+        public string GetCommander()
+        {
+            return _currentCommander;
+        }
 
-    //--------------------------------------------------------------
-    public abstract void PrintInfo();
+        //--------------------------------------------------------------
+        public void ChangeCommander(string newCommander)
+        {
+            _currentCommander = newCommander;
+        }
+
+        //--------------------------------------------------------------
+        public abstract void PrintInfo();
+    }
 }

@@ -2,7 +2,7 @@ namespace IdfOperation
 {
     public static class TerroristGenerator
     {
-        private static readonly List<string> names = new List<string>()
+        private static readonly List<string> Names = new List<string>()
         {
             "Ahmed Yassin", "Mohammed Deif", "Khaled Mashal", "Ismail Haniyeh",
             "Marwan Issa", "Salah Shehade", "Yahya Sinwar", "Ibrahim Abu al-Naja",
@@ -10,12 +10,12 @@ namespace IdfOperation
             "Jihad al-Amarin", "Tawfiq Abu Naim", "Ayman Nofal"
         };
 
-        private static readonly List<string> weapons = new List<string>()
+        private static readonly List<string> Weapons = new List<string>()
         {
             "Knife", "Gun", "M16", "AK47"
         };
 
-        private static readonly Random rnd = new Random();
+        private static readonly Random Rnd = new Random();
 
         //==============================================================
         public static List<Terrorist> Generate(int count)
@@ -24,15 +24,15 @@ namespace IdfOperation
 
             for (int i = 0; i < count; i++)
             {
-                string name = names[rnd.Next(0, names.Count)];
-                int rank = rnd.Next(1, 6);
-                int weaponCount = rnd.Next(1, 4);
+                string name = Names[Rnd.Next(0, Names.Count)];
+                int rank = Rnd.Next(1, 6);
+                int weaponCount = Rnd.Next(1, 4);
 
                 List<string> selectedWeapons = new List<string>();
 
                 while (selectedWeapons.Count < weaponCount)
                 {
-                    string randomWeapon = weapons[rnd.Next(weapons.Count)];
+                    string randomWeapon = Weapons[Rnd.Next(Weapons.Count)];
                     if (!selectedWeapons.Contains(randomWeapon))
                         selectedWeapons.Add(randomWeapon);
                 }

@@ -29,7 +29,7 @@ namespace IdfOperation
         //--------------------------------------------------------------
         public override void PrintInfo()
         {
-            Console.WriteLine($"Name: {_name}, Ammo: {_ammo}/{_maxAmmo}, Effective Against: {string.Join(", ", _targetType)}, Fuel: {_fuel} liters");
+            Console.WriteLine($"Name: {Name}, Ammo: {Ammo}/{MaxAmmo}, Effective Against: {string.Join(", ", TargetTypes)}, Fuel: {_fuel} liters");
         }
     }
 }

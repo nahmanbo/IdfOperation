@@ -11,8 +11,8 @@ namespace IdfOperation
         public Terrorist(string name, int rank, List<string> weapons)
         {
             Name = name;
-            Rank = Math.Clamp(rank, 1, 5);
-            Weapons = weapons ?? new List<string>();
+            Rank = rank;
+            Weapons = weapons;
             IsAlive = true;
         }
 

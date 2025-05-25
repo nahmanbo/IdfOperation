@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-
 namespace IdfOperation
 {
     public class IntelligenceDivision
     {
         private readonly List<IntelligenceReport> _reports;
-        private static readonly List<string> _locations = new() { "buildings", "people", "vehicles", "open areas" };
-        private static readonly Random _random = new();
+        private static readonly List<string> Locations = new() { "buildings", "people", "vehicles", "open areas" };
+        private static readonly Random Random = new();
 
         //====================================
         public IntelligenceDivision()
@@ -25,8 +22,8 @@ namespace IdfOperation
         //--------------------------------------------------------------
         private string GetRandomLocation()
         {
-            int index = _random.Next(_locations.Count);
-            return _locations[index];
+            int index = Random.Next(Locations.Count);
+            return Locations[index];
         }
 
         //--------------------------------------------------------------
@@ -34,36 +31,27 @@ namespace IdfOperation
         {
             return _reports.AsReadOnly();
         }
-        
-        public IntelligenceReport GetMostDangerousTerrorist()
-        {
-            if (_reports.Count == 0)
-                return null;
 
+        //--------------------------------------------------------------
+        public IntelligenceReport GetMostDangerousTerrorist()
+        { 
             IntelligenceReport mostDangerous = _reports[0];
 
             foreach (var report in _reports)
             {
-                if (report.ThreatLevel > mostDangerous.ThreatLevel)
+                if (report.GetThreatLevel() > mostDangerous.GetThreatLevel())
                     mostDangerous = report;
             }
 
             return mostDangerous;
         }
 
-
         //--------------------------------------------------------------
-        public void PrintAllReports()
+        public void PrintInfo()
         {
-            if (_reports.Count == 0)
-            {
-                Console.WriteLine("No intelligence reports available.");
-                return;
-            }
-
             foreach (var report in _reports)
             {
-                report.PrintReport();
+                report.PrintInfo();
                 Console.WriteLine("--------------------------------");
             }
         }
