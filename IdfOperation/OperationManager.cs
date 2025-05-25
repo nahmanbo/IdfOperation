@@ -30,7 +30,7 @@ namespace IdfOperation
                 Console.WriteLine("9. Exit");
                 Console.Write("Enter your choice (1-9): ");
 
-                string choice = Console.ReadLine()?.Trim();
+                string choice = Console.ReadLine()?.Trim() ?? "";
 
                 switch (choice)
                 {
@@ -81,7 +81,7 @@ namespace IdfOperation
         public void PrintReportByTerroristName()
         {
             Console.Write("Enter terrorist name: ");
-            string name = Console.ReadLine()?.Trim();
+            string name = Console.ReadLine()?.Trim() ?? "";
 
             var report = _idf.Intelligence.GetReportByTerroristName(name);
             if (report == null)
@@ -110,7 +110,7 @@ namespace IdfOperation
         private void EliminateByName()
         {
             Console.Write("Enter the name of the terrorist to eliminate: ");
-            string name = Console.ReadLine()?.Trim();
+            string name = Console.ReadLine()?.Trim() ?? "";
 
             var report = _idf.Intelligence.GetReportByTerroristName(name);
             if (report == null)
