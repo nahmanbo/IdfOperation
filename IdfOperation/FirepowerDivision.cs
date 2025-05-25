@@ -10,9 +10,10 @@ namespace IdfOperation
             _weaponsByTarget = new Dictionary<string, List<Weapon>>();
 
             AddF16(5);
+            AddEyeFire(2);
             AddZik(8);
             AddTank(3);
-            AddEyeFire(2);
+            
             
         }
 

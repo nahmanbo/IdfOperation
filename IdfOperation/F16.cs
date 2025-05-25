@@ -25,6 +25,35 @@ namespace IdfOperation
         {
             return _fuel;
         }
+        //--------------------------------------------------------------
+        public override void UseAmmo()
+        {
+            string input = "";
+            while (input != "1" && input != "0.5")
+            {
+               
+                Console.Write($"You need a {Name} Enter Bomb weight : (0.5 or 1)");
+                input = Console.ReadLine().Trim();
+
+                switch (input)
+                {
+                    case "1":
+                        Ammo -= 1;
+                        break;
+                    case "0.5":
+                        Ammo -= 0.5;
+                        break;
+
+                    default:
+                        Console.WriteLine("Enter a valid number.");
+                        continue;
+
+
+
+                }
+                
+            }
+        }
 
         //--------------------------------------------------------------
         public override void PrintInfo()

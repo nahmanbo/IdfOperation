@@ -133,7 +133,7 @@ namespace IdfOperation
                 return;
             }
 
-            weapon.AttackTarget(terrorist, 1);
+            weapon.AttackTarget(terrorist);
         }
 
         //--------------------------------------------------------------
@@ -160,7 +160,7 @@ namespace IdfOperation
                 return;
             }
 
-            weapon.AttackTarget(terrorist, 1);
+            weapon.AttackTarget(terrorist);
         }
     }
 }
