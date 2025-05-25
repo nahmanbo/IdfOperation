@@ -3,7 +3,7 @@ namespace IdfOperation
     public class IntelligenceDivision
     {
         private readonly List<IntelligenceReport> _reports;
-        private static readonly List<string> Locations = new() { "buildings", "people", "vehicles", "open areas" };
+        private static readonly List<string> Locations = new() { "buildings", "people", "vehicles", "open areas","Fence space" };
         private static readonly Random Random = new();
 
         //====================================

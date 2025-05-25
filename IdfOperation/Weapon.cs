@@ -3,7 +3,7 @@ namespace IdfOperation
     public abstract class Weapon
     {
         protected string Name { get; }
-        protected float Ammo { get; set; }
+        protected double Ammo { get; set; }
         protected int MaxAmmo { get; }
         protected List<string> TargetTypes { get; }
 
@@ -23,16 +23,16 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public void UseAmmo(float count)
-        {
-            if (count <= 0 || count > Ammo)
-            {
-                Console.WriteLine("Invalid ammo quantity.");
-                return;
-            }
+        public abstract void UseAmmo();
+        
+            //if (count <= 0 || count > Ammo)
+            //{
+            //    Console.WriteLine("Invalid ammo quantity.");
+            //    return;
+            //}
 
-            Ammo -= count;
-        }
+            //Ammo -= count;
+        
 
         //--------------------------------------------------------------
         public void UpdateAmmo(float count)
@@ -41,7 +41,7 @@ namespace IdfOperation
         }
 
         //--------------------------------------------------------------
-        public float GetAmmo()
+        public double GetAmmo()
         {
             return Ammo;
         }
@@ -50,9 +50,9 @@ namespace IdfOperation
         public abstract void PrintInfo();
 
         //--------------------------------------------------------------
-        public void AttackTarget(Terrorist terrorist, float ammoToUse)
+        public void AttackTarget(Terrorist terrorist)
         {
-            UseAmmo(ammoToUse);
+            UseAmmo();
 
             if (this is IFuelable fuelable)
                 fuelable.LessFuel();

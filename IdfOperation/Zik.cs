@@ -25,7 +25,11 @@ namespace IdfOperation
         {
             return _fuel;
         }
-        
+        //--------------------------------------------------------------
+        public override void UseAmmo()
+        {
+            Ammo -= 1;
+        }
         //--------------------------------------------------------------
         public override void PrintInfo()
         {

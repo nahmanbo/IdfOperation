@@ -124,7 +124,25 @@ namespace IdfOperation
                 return;
             }
 
+
+            var terrorist = report.GetTerrorist();
+            if (!terrorist.IsAlive)
+            {
+                Console.WriteLine($"{name} is already dead.");
+                return;
+            }
+
+            var weapon = _idf.Firepower.FindAvailableWeaponFor(report.GetLastKnownLocation());
+            if (weapon == null)
+            {
+                Console.WriteLine($"No weapon available for target type: {report.GetLastKnownLocation()}");
+                return;
+            }
+
+          
+
             TryEliminate(report.GetTerrorist(), report.GetLastKnownLocation());
+
         }
 
         //--------------------------------------------------------------
@@ -180,8 +198,11 @@ namespace IdfOperation
                 return false;
             }
 
-            weapon.AttackTarget(terrorist, 1);
+
+            weapon.AttackTarget(terrorist);
+           
             return true;
+
         }
     }
 }

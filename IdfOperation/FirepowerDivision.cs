@@ -10,8 +10,11 @@ namespace IdfOperation
             _weaponsByTarget = new Dictionary<string, List<Weapon>>();
 
             AddF16(5);
+            AddEyeFire(2);
             AddZik(8);
             AddTank(3);
+            
+            
         }
 
         //--------------------------------------------------------------
@@ -41,6 +44,15 @@ namespace IdfOperation
             {
                 var tank = new Tank(i + 1);
                 MapWeaponToTargets(tank);
+            }
+        }
+        //--------------------------------------------------------------
+        private void AddEyeFire(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var EyeFire = new EyeFire(i + 1);
+                MapWeaponToTargets(EyeFire);
             }
         }
 
