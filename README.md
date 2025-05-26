@@ -99,7 +99,7 @@ The system emphasizes **OOP principles**, including **inheritance**, **abstracti
 
 ## Authors
 
-Developed by [Yoel Ider and Nahman Ben Or](https://github.com/nahmanbo).
+Developed by [Yoel Ider, Shmuel Blau, Nahman Ben Or](https://github.com/nahmanbo).
 
 
 
