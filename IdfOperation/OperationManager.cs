@@ -197,12 +197,9 @@ namespace IdfOperation
                 Console.WriteLine($"No weapon available for target type: {targetType}");
                 return false;
             }
-
-
+            
             weapon.AttackTarget(terrorist);
-           
             return true;
-
         }
     }
 }

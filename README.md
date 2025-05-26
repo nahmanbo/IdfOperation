@@ -89,9 +89,11 @@ The system emphasizes **OOP principles**, including **inheritance**, **abstracti
 
 ## Future Improvements
 
+- Creating terrorists by sending a request to openAi.
+- Create intelligence reports by sending a request to openAi.
+- Enabling free search using requests from openAi.
 - GUI interface instead of console.
-- Persistence layer for terrorist data and reports.
-- Simulation of real-time intelligence and automated decision-making.
+
 
 ---
 
