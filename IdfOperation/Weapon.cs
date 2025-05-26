@@ -25,15 +25,6 @@ namespace IdfOperation
         //--------------------------------------------------------------
         public abstract void UseAmmo();
         
-            //if (count <= 0 || count > Ammo)
-            //{
-            //    Console.WriteLine("Invalid ammo quantity.");
-            //    return;
-            //}
-
-            //Ammo -= count;
-        
-
         //--------------------------------------------------------------
         public void UpdateAmmo(float count)
         {

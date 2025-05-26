@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+
 namespace IdfOperation
 {
     public class F16 : Weapon, IFuelable
     {
         private int _fuel = 100;
 
-        //==============================================================
+        //====================================
         public F16(int number)
             : base($"F16-{number}", 8, new List<string> { "buildings" }, 8) {}
 
@@ -25,33 +28,29 @@ namespace IdfOperation
         {
             return _fuel;
         }
-        //--------------------------------------------------------------
+
+//--------------------------------------------------------------
         public override void UseAmmo()
         {
-            string input = "";
-            while (input != "1" && input != "0.5")
+            while (true)
             {
-               
-                Console.Write($"You need a {Name} Enter Bomb weight : (0.5 or 1)");
-                input = Console.ReadLine().Trim();
+                Console.Write($"You need a {Name}. Enter Bomb weight (0.5 or 1): ");
+                string input = Console.ReadLine().Trim();
 
                 switch (input)
                 {
                     case "1":
                         Ammo -= 1;
-                        break;
+                        return;
+
                     case "0.5":
                         Ammo -= 0.5;
-                        break;
+                        return;
 
                     default:
                         Console.WriteLine("Enter a valid number.");
-                        continue;
-
-
-
+                        break;
                 }
-                
             }
         }
 
