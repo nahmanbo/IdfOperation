@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace IdfOperation
 {
     public class F16 : Weapon, IFuelable
@@ -29,7 +26,7 @@ namespace IdfOperation
             return _fuel;
         }
 
-//--------------------------------------------------------------
+        //--------------------------------------------------------------
         public override void UseAmmo()
         {
             while (true)
@@ -42,11 +39,9 @@ namespace IdfOperation
                     case "1":
                         Ammo -= 1;
                         return;
-
                     case "0.5":
                         Ammo -= 0.5;
                         return;
-
                     default:
                         Console.WriteLine("Enter a valid number.");
                         break;

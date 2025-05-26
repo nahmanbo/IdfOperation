@@ -62,9 +62,7 @@ namespace IdfOperation
             foreach (var target in weapon.GetTargetTypes())
             {
                 if (!_weaponsByTarget.ContainsKey(target))
-                {
                     _weaponsByTarget[target] = new List<Weapon>();
-                }
 
                 _weaponsByTarget[target].Add(weapon);
             }

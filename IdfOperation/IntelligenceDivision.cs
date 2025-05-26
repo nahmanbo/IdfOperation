@@ -3,7 +3,7 @@ namespace IdfOperation
     public class IntelligenceDivision
     {
         private readonly List<IntelligenceReport> _reports;
-        private static readonly List<string> Locations = new() { "buildings", "people", "vehicles", "open areas","Fence space" };
+        private static readonly List<string> Locations = new() { "buildings", "people", "vehicles", "open areas", "Fence space" };
         private static readonly Random Random = new();
 
         //====================================
@@ -32,7 +32,7 @@ namespace IdfOperation
             return _reports.AsReadOnly();
         }
 
-//--------------------------------------------------------------
+        //--------------------------------------------------------------
         public IntelligenceReport? GetMostDangerousAliveReport()
         {
             IntelligenceReport? mostDangerous = null;
@@ -45,9 +45,7 @@ namespace IdfOperation
                     continue;
 
                 if (mostDangerous == null || report.GetThreatLevel() > mostDangerous.GetThreatLevel())
-                {
                     mostDangerous = report;
-                }
             }
 
             return mostDangerous;
@@ -61,11 +59,8 @@ namespace IdfOperation
                 var terrorist = report.GetTerrorist();
 
                 if (string.Equals(terrorist.Name, name, StringComparison.OrdinalIgnoreCase) && terrorist.IsAlive)
-                {
                     return report;
-                }
             }
-
             return null;
         }
 
