@@ -1,163 +1,103 @@
 # IdfOperation
-Repo Manager:Nachman Ben Or
-First Contributor:Yoel Ider
 
-IDF Operation � First Strike: Organization Structure
-Hierarchy
+## Overview
 
-Organization: Top-level entity (e.g., IDF, Hamas), implemented via IOrganization.
-IDF:
-Fire Array: Manages strike units (F16, Hermes 460, M109).
-AMAN: Military Intelligence branch, generates intelligence messages.
+`IdfOperation` is a C# simulation project that models the operational structure and activities of the Israeli Defense Forces (IDF) and Hamas. It integrates firepower management, intelligence gathering, and target elimination workflows based on threat assessments.
 
+The system emphasizes **OOP principles**, including **inheritance**, **abstraction**, and **encapsulation**, and demonstrates a **modular design** that supports future expansion.
 
-Hamas:
-Fire Array: Manages strike units (Qassam Brigades).
+---
 
+## Project Structure
 
+### 🧩 Core Entities
 
+| Class         | Description                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| `Organization`| Abstract base class for both IDF and Hamas. Manages commander and est. date.|
+| `Idf`         | Inherits `Organization`. Contains Firepower and Intelligence divisions.     |
+| `Hamas`       | Inherits `Organization`. Holds a list of `Terrorist` objects.               |
 
+---
 
-Interfaces and Classes
-Interface: IOrganization
+### 🔥 Firepower System
 
-Role: Defines core behavior for any organization, enabling future additions (e.g., Hezbollah).
-Methods:
-getName(): Returns organization name (e.g., "IDF", "Hamas").
-getEstablishmentDate(): Returns date of establishment.
-getCommander(): Returns current commander/leader name.
-getFireArray(): Returns the fire array (strike units).
-getIntelligence(): Returns intelligence branch (if applicable).
-executeOperation(target): Initiates an operation (e.g., strike) on a target.
+| Class             | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `Weapon`          | Abstract base class for all weapons. Contains ammo, targets, and attack logic. |
+| `IFuelable`       | Interface for fuel-consuming weapons.                                       |
+| `F16`, `Tank`, `Zik`, `EyeFire` | Inherit from `Weapon`. Implement different ammo usage and fuel behaviors.|
+| `FirepowerDivision`| Initializes and manages weapons by effective target type.                |
 
+---
 
+### 🕵️ Intelligence System
 
-IDF
+| Class                  | Description                                                             |
+|------------------------|-------------------------------------------------------------------------|
+| `Terrorist`            | Represents a Hamas operative. Has name, rank, alive status, and weapons.|
+| `TerroristGenerator`   | Static utility to generate random `Terrorist` instances.                |
+| `IntelligenceReport`   | Holds information about a terrorist and calculates threat level.        |
+| `IntelligenceDivision` | Manages a list of reports and provides search/filter methods.          |
 
-Role: Israeli Defense Forces, coordinating strikes and intelligence.
-Implements: IOrganization.
-Properties:
-Name: "IDF".
-Date of establishment: 1948.
-Current commander.
-Fire Array: Collection of strike units.
-AMAN: Intelligence branch.
+---
 
+### 🧠 Operation Management
 
-Responsibilities: Manages strikes and intelligence operations.
+| Class             | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `OperationManager`| Provides a console-based menu to perform operations such as viewing data and eliminating terrorists. |
+| `Program`         | Entry point of the system. Instantiates Hamas, IDF, and OperationManager.    |
 
-Hamas
+---
 
-Role: Palestinian militant organization, governing Gaza and conducting attacks.
-Implements: IOrganization.
-Properties:
-Name: "Hamas".
-Date of establishment: 1987.
-Current commander: Committee-based leadership.
-Fire Array: Qassam Brigades (rocket units, infantry).
-List of affiliated terrorists.
+## Functionality
 
+- View complete IDF or Hamas details.
+- Browse Firepower and Intelligence data.
+- Search for terrorist reports by name.
+- Identify and eliminate the most dangerous terrorist.
+- Eliminate terrorists by location/type using appropriate weapons.
+- Track fuel and ammo consumption during operations.
 
-Responsibilities: Conducts attacks, manages operatives.
+---
 
-Interface: IFireArray
+## Menu Options
 
-Role: Manages strike units.
-Methods:
-getStrikeUnits(): Returns list of strike units.
-addStrikeUnit(unit): Adds a new strike unit.
-getAvailableUnits(): Returns units with remaining ammo.
-
-
-
-Fire Array
-
-Role: Manages strike units under an organization.
-Implements: IFireArray.
-Properties:
-IDF: F16, Hermes 460, M109.
-Hamas: Qassam Brigades (rocket launchers, infantry units).
+1. **View full IDF information**
+2. **View full Hamas information**
+3. **View Firepower Division data**
+4. **View Intelligence Division reports**
+5. **View terrorist report by name**
+6. **View most dangerous terrorist report**
+7. **Eliminate terrorist by name**
+8. **Eliminate the most dangerous terrorist**
+9. **Eliminate terrorists by target type**
+10. **Exit**
 
 
-Responsibilities: Tracks and deploys strike units.
+---
 
-Interface: IStrikeUnit
+## Design Principles
 
-Role: Defines core behavior for all strike units.
-Methods:
-getName(): Returns unit name (e.g., "F16", "Qassam Rocket").
-getAmmoCapacity(): Returns remaining strikes.
-consumeAmmo(): Reduces ammo after a strike.
-canStrikeTarget(targetType): Checks if unit can hit a target type.
-getTargetType(): Returns effective target type.
+- **Single Responsibility**: Each class has a distinct role (e.g., weapon logic, intelligence processing).
+- **Open/Closed**: Adding new weapons or intelligence features requires minimal code changes.
+- **Encapsulation**: Internal states like fuel, ammo, and report details are managed internally with controlled access.
+- **Polymorphism**: Weapon behaviors vary by subclass and are invoked dynamically via base class references.
 
+---
 
+## Future Improvements
 
-Interface: IFuelable (Optional)
+- GUI interface instead of console.
+- Persistence layer for terrorist data and reports.
+- Simulation of real-time intelligence and automated decision-making.
 
-Role: For strike units requiring fuel.
-Methods:
-getFuelLevel(): Returns current fuel.
-consumeFuel(amount): Reduces fuel.
-refuel(): Restores fuel.
+---
 
+## Authors
 
-
-Strike Units (IDF)
-F16 Fighter Jet (IStrikeUnit, IFuelable)
-
-Properties:
-Ammo: 8 strikes.
-Targets: Buildings.
-Features: 0.5/1-ton bombs, pilot-operated, uses fuel.
+Developed by [Yoel Ider and Nahman Ben Or](https://github.com/nahmanbo).
 
 
-
-Hermes 460 Drone (IStrikeUnit, IFuelable)
-
-Properties:
-Ammo: 3 strikes.
-Targets: People, Vehicles.
-Features: Target-specific bombs, uses fuel.
-
-
-
-M109 Artillery (IStrikeUnit)
-
-Properties:
-Ammo: 40 strikes.
-Targets: OpenArea.
-Features: Hits 2�3 targets at once, no fuel.
-
-
-
-Strike Units (Hamas)
-Qassam Brigades (IStrikeUnit)
-
-Properties:
-Ammo: Varies (e.g., rockets, small arms).
-Targets: Civilians, Military.
-Features: Rocket attacks, guerilla tactics, no fuel.
-
-
-
-Interface: IAMAN
-
-Role: Defines behavior for intelligence operations (IDF-specific).
-Methods:
-generateIntelMessage(terrorist, location, timestamp): Creates a new intelligence message.
-getIntelMessages(): Returns all intelligence messages.
-getIntelByTerrorist(terrorist): Returns messages for a specific terrorist.
-
-
-
-AMAN
-
-Role: Military Intelligence branch under IDF.
-Implements: IAMAN.
-Properties:
-List of intelligence messages (linked terrorist, location, timestamp).
-
-
-Responsibilities: Generates and manages intelligence for strike planning.
 
