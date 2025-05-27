@@ -24,5 +24,6 @@ namespace IdfOperation.Factory
             using var doc = JsonDocument.Parse(jsonResponse);
             return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString()!;
         }
+
     }
 }
