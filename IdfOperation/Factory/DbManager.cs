@@ -9,7 +9,7 @@ namespace IdfOperation.Factory
     public static class DbManager
 {
     //-------------------------------------------------------------------------------
-    private static List<Terrorist> LoadTerroristsFromDB()
+    public static List<Terrorist> LoadTerroristsFromDB()
     {
         string file = File.ReadAllText(Constants.Paths.Terrorists);
 
@@ -29,7 +29,7 @@ namespace IdfOperation.Factory
 
     //-----------------------------------------------------------------------------------
 
-    public static List<Terrorist> GeTerroristsFromDB()
+    public static List<Terrorist> GetTerroristsFromDB()
     {
 
         List<Terrorist> terrorists = new List<Terrorist>();
@@ -56,13 +56,15 @@ namespace IdfOperation.Factory
         try
         {
 
-            ;
+            
 
-            List<Terrorist> terrorists = LoadTerroristsFromDB();
+           List<Terrorist> terrorists = LoadTerroristsFromDB();
 
-            terrorists.Select(t => t.Id == terorrist.Id ? terorrist : t);
+           List<Terrorist> new_list = terrorists.Select(t => t.Id == terorrist.Id ? terorrist : t).ToList();
 
-            WriteTerroristsToDB(terrorists);
+           WriteTerroristsToDB(new_list);
+           UpdateIntelligenceReportInDB(terorrist);
+
 
 
         }
@@ -96,12 +98,13 @@ namespace IdfOperation.Factory
     //-----------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------
 
-    private static List<IntelligenceReport> LoadIntelligenceReportsFromDB()
+    public static List<IntelligenceReport> LoadIntelligenceReportsFromDB()
     {
+
         string file = File.ReadAllText(Constants.Paths.IntelligenceReports);
-
+           
         List<IntelligenceReport> IntelligenceReports = JsonSerializer.Deserialize<List<IntelligenceReport>>(file)!;
-
+           
         return IntelligenceReports;
 
     }
@@ -115,7 +118,7 @@ namespace IdfOperation.Factory
     }
 
     //-----------------------------------------------------------------------------------
-    public static List<IntelligenceReport> GeIntelligenceReportFromDB()
+    public static List<IntelligenceReport> GetIntelligenceReportFromDB()
     {
 
         List<IntelligenceReport> IntelligenceReports = new List<IntelligenceReport>();
@@ -131,14 +134,33 @@ namespace IdfOperation.Factory
 
         return IntelligenceReports;
     }
-    //--------------------------------------------------------------------------------------------------
-    public static void UpdateIntelligenceReportInDB(Terrorist terrorist)
+        //--------------------------------------------------------------------------------------------------
+        public static void AddIntelligenceReportToDB(IntelligenceReport intelligenceReport)
+        {
+            try
+            {
+                List<IntelligenceReport> IntelligenceReports = LoadIntelligenceReportsFromDB();
+
+                IntelligenceReports.Add(intelligenceReport);
+
+                WriteIntelligenceReportsToDB(IntelligenceReports);
+            }
+            catch
+            {
+                Console.WriteLine("הוספה נכשלה");
+            }
+
+        }
+        //------------------------------------------------------------------------------
+
+
+        public static void UpdateIntelligenceReportInDB(Terrorist terrorist)
     {
         try
         {
             List<IntelligenceReport> IntelligenceReports = LoadIntelligenceReportsFromDB();
 
-            IntelligenceReports.Find(i => i._terrorist.Id == terrorist.Id)!._terrorist.IsAlive = false;
+               IntelligenceReports.Find(i => i._terrorist.Id == terrorist.Id)!._terrorist=terrorist;
 
             WriteIntelligenceReportsToDB(IntelligenceReports);
         }

@@ -5,8 +5,8 @@
         // נתיבי קבצים
         public static class Paths
         {
-            public const string Terrorists = @"..\db\Terrorists.json";
-            public const string IntelligenceReports = @"..\db\Reports.json";
+            public const string Terrorists = @"..\..\..\db\Terrorists.json";
+            public const string IntelligenceReports = @"..\..\..\db\Reports.json";
             public const string SecretsFile = @"secrets.json";
         }
 
