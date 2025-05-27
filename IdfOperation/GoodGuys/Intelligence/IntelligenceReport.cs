@@ -17,6 +17,8 @@ namespace IdfOperation.GoodGuys.Intelligence
             _lastKnownLocation = lastKnownLocation;
             _reportTime = reportTime;
         }
+        //---------------------------------------------------
+        public IntelligenceReport() { }
 
         //--------------------------------------------------------------
         private int CalculateThreatScore()

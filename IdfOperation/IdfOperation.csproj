@@ -7,4 +7,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="DB\Reports.json" />
+      <None Remove="DB\Terroristes.json" />
+      <None Remove="DB\Terrorists.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="DB\Reports.json" />
+      <Content Include="DB\Terroristes.json" />
+    </ItemGroup>
+
 </Project>
