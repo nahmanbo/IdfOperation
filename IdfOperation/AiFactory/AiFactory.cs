@@ -11,7 +11,7 @@ public static class AiFactory
     {
         HttpClient client = new HttpClient();
 
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Secrets.OpenAIKey}");
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Environment.GetEnvironmentVariable("OPENAI_API_KEY")}");
 
         var body = new
         {
