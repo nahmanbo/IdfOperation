@@ -1,4 +1,6 @@
-namespace IdfOperation
+using IdfOperation.BadGuys;
+
+namespace IdfOperation.GoodGuys.Firepower
 {
     public abstract class Weapon
     {
@@ -24,7 +26,7 @@ namespace IdfOperation
 
         //--------------------------------------------------------------
         public abstract void UseAmmo();
-        
+
         //--------------------------------------------------------------
         public void UpdateAmmo(float count)
         {

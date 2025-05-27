@@ -1,4 +1,6 @@
-namespace IdfOperation
+using IdfOperation.Organizations;
+
+namespace IdfOperation.BadGuys
 {
     public class Hamas : Organization
     {

@@ -1,4 +1,6 @@
-namespace IdfOperation
+using IdfOperation.BadGuys;
+
+namespace IdfOperation.GoodGuys.Intelligence
 {
     public class IntelligenceDivision
     {
@@ -50,7 +52,7 @@ namespace IdfOperation
 
             return mostDangerous;
         }
-        
+
         //--------------------------------------------------------------
         public IntelligenceReport? GetReportByTerroristName(string name)
         {

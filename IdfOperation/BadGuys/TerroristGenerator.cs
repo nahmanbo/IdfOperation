@@ -1,11 +1,12 @@
 using System.Text.Json;
+using IdfOperation.Factory;
 
-namespace IdfOperation
+namespace IdfOperation.BadGuys
 {
     public static class TerroristGenerator
     {
         //==============================================================
-        public static string Prompt_terrorist =
+        public static string PromptTerrorist =
             "החזר לי מערך של אובייקטי JSON בלבד, ללא טקסט נוסף, שכל אובייקט יכיל את השדות הבאים:\r\n" +
             "- Name (string): באנגלית שם פרטי ושם משפחה מוסלמים או חמאסיים מגוונים (לא חוזרים על עצמם)\r\n" +
             "- Id (int): מספר אקראי בן 6 ספרות, לא עוקב\r\n" +
@@ -22,10 +23,13 @@ namespace IdfOperation
 
             try
             {
-                string prompt = Prompt_terrorist + count;
-                string json = await AiFactory.RequestOpenAI(prompt);
+                string prompt = PromptTerrorist + count;
+                string json = await AiFactory.RequestOpenAi(prompt);
 
-                var terrorists = JsonSerializer.Deserialize<List<Terrorist>>(json, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+                var terrorists = JsonSerializer.Deserialize<List<Terrorist>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
                 if (terrorists == null)
                     throw new Exception("OpenAI returned null or empty array.");

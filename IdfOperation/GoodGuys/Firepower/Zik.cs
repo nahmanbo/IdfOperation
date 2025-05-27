@@ -1,4 +1,4 @@
-namespace IdfOperation
+namespace IdfOperation.GoodGuys.Firepower
 {
     public class Zik : Weapon, IFuelable
     {

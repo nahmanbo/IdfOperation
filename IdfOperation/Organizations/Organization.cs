@@ -1,4 +1,4 @@
-namespace IdfOperation
+namespace IdfOperation.Organizations
 {
     public abstract class Organization
     {

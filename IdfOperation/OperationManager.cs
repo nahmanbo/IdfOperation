@@ -1,3 +1,6 @@
+using IdfOperation.BadGuys;
+using IdfOperation.GoodGuys;
+
 namespace IdfOperation
 {
     public class OperationManager
@@ -38,43 +41,33 @@ namespace IdfOperation
                     case "1":
                         _idf.PrintInfo();
                         break;
-
                     case "2":
                         _hamas.PrintInfo();
                         break;
-
                     case "3":
                         _idf.Firepower.PrintInfo();
                         break;
-
                     case "4":
                         _idf.Intelligence.PrintInfo();
                         break;
-
                     case "5":
                         PrintReportByTerroristName();
                         break;
-
                     case "6":
                         PrintMostDangerousTerroristReport();
                         break;
-
                     case "7":
                         EliminateByName();
                         break;
-
                     case "8":
                         EliminateMostDangerous();
                         break;
-
                     case "9":
                         EliminateByTargetType();
                         break;
-
                     case "10":
                         Console.WriteLine("Exiting program...");
                         return;
-
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
                         break;
@@ -124,7 +117,6 @@ namespace IdfOperation
                 return;
             }
 
-
             var terrorist = report.GetTerrorist();
             if (!terrorist.IsAlive)
             {
@@ -139,10 +131,7 @@ namespace IdfOperation
                 return;
             }
 
-          
-
             TryEliminate(report.GetTerrorist(), report.GetLastKnownLocation());
-
         }
 
         //--------------------------------------------------------------
@@ -197,7 +186,7 @@ namespace IdfOperation
                 Console.WriteLine($"No weapon available for target type: {targetType}");
                 return false;
             }
-            
+
             weapon.AttackTarget(terrorist);
             return true;
         }
