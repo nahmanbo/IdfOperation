@@ -1,4 +1,4 @@
-namespace IdfOperation
+namespace IdfOperation.BadGuys
 {
     public class Terrorist
     {

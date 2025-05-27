@@ -1,4 +1,9 @@
-namespace IdfOperation
+using System;
+using System.Collections.Generic;
+using IdfOperation.GoodGuys.Firepower;
+using IdfOperation.BadGuys;
+
+namespace IdfOperation.GoodGuys.Firepower
 {
     public class FirepowerDivision
     {
@@ -13,8 +18,6 @@ namespace IdfOperation
             AddEyeFire(2);
             AddZik(8);
             AddTank(3);
-            
-            
         }
 
         //--------------------------------------------------------------
@@ -46,13 +49,14 @@ namespace IdfOperation
                 MapWeaponToTargets(tank);
             }
         }
+
         //--------------------------------------------------------------
         private void AddEyeFire(int count)
         {
             for (int i = 0; i < count; i++)
             {
-                var EyeFire = new EyeFire(i + 1);
-                MapWeaponToTargets(EyeFire);
+                var eyeFire = new EyeFire(i + 1);
+                MapWeaponToTargets(eyeFire);
             }
         }
 

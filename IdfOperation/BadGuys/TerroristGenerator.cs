@@ -1,11 +1,13 @@
 using System.Text.Json;
+using IdfOperation.Factory;
+using IdfOperation;
 
-namespace IdfOperation
+
+namespace IdfOperation.BadGuys
 {
     public static class TerroristGenerator
     {
-        //==============================================================
-       
+        
 
         //==============================================================
         public static async Task<List<Terrorist>> Generate(int count)
@@ -14,11 +16,16 @@ namespace IdfOperation
 
             try
             {
-                string prompt =Constants.Prompts.Terrorist + count;
 
-                string json = await AiFactory.RequestOpenAI(prompt);
-
-                var terrorists = JsonSerializer.Deserialize<List<Terrorist>>(json, new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+                string prompt = Constants.Prompts.Terrorist + count;
+                
+                string json = await AiFactory.RequestOpenAi(prompt);
+                Console.WriteLine(json);
+                
+                var terrorists = JsonSerializer.Deserialize<List<Terrorist>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
                 if (terrorists == null)
                     throw new Exception("OpenAI returned null or empty array.");

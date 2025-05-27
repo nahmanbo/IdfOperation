@@ -1,8 +1,12 @@
 ﻿using IdfOperation;
+using IdfOperation.BadGuys;
+using IdfOperation.GoodGuys.Intelligence;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
-public static class DbManager
+namespace IdfOperation.Factory
+    {
+    public static class DbManager
 {
     //-------------------------------------------------------------------------------
     private static List<Terrorist> LoadTerroristsFromDB()
@@ -44,7 +48,7 @@ public static class DbManager
 
         return terrorists;
     }
-    
+
     //---------------------------------------------------------------
     public static void UpdateTerroristInDB(Terrorist terorrist)
     {
@@ -67,7 +71,7 @@ public static class DbManager
             Console.WriteLine("עדכון בדאטה בייס נכשל");
         }
 
-       
+
     }
 
     //------------------------------------------------------------------
@@ -142,9 +146,10 @@ public static class DbManager
         {
             Console.WriteLine("עדכון נכשל");
         }
-       
+
     }
 
 
 
+}
 }

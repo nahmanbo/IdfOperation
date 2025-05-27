@@ -1,11 +1,15 @@
-﻿namespace IdfOperation; 
+﻿using IdfOperation.BadGuys;
+using IdfOperation.GoodGuys;
 
-class Program
-{ 
-    static void Main()
+namespace IdfOperation
+{
+    class Program
     {
-        Hamas hamas = new Hamas("Yahya Sinwar");
-        Idf idf = new Idf("Eyal Zamir");
-        OperationManager operation = new OperationManager(idf, hamas);
+        static void Main()
+        {
+            Hamas hamas = new Hamas("Yahya Sinwar");
+            Idf idf = new Idf("Eyal Zamir");
+            OperationManager operation = new OperationManager(idf, hamas);
+        }
     }
 }

@@ -1,4 +1,6 @@
-namespace IdfOperation
+using IdfOperation.BadGuys;
+
+namespace IdfOperation.GoodGuys.Intelligence
 {
     public class IntelligenceReport
     {
@@ -33,7 +35,7 @@ namespace IdfOperation
 
             return _terrorist.Rank * weaponScore;
         }
-        
+
         //--------------------------------------------------------------
         public void UpdateLastKnownLocation(string newLocation)
         {

@@ -1,37 +1,29 @@
 ﻿using System.Text;
 using System.Text.Json;
-using IdfOperation;
 
-public static class AiFactory
+namespace IdfOperation.Factory
 {
-    //==============================================================
-
-    //--------------------------------------------------------------
-    public static async Task<string> RequestOpenAI(string prompt)
+    public static class AiFactory
     {
-        HttpClient client = new HttpClient();
-
-        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Environment.GetEnvironmentVariable("OPENAI_API_KEY")}");
-
-        var body = new
+        public static async Task<string> RequestOpenAi(string prompt)
         {
-            model = "gpt-4",
-            messages = new[]
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Environment.GetEnvironmentVariable("OPENAI_API_KEY")}");
+
+            var body = new
             {
-                new { role = "user", content = prompt }
-            }
-        };
+                model = "gpt-4",
+                messages = new[] { new { role = "user", content = prompt } }
+            };
 
-        string jsonRequest = JsonSerializer.Serialize(body);
-        var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+            var jsonRequest = JsonSerializer.Serialize(body);
+            var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://api.openai.com/v1/chat/completions", content);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
 
-        HttpResponseMessage response = await client.PostAsync("https://api.openai.com/v1/chat/completions", content);
+            using var doc = JsonDocument.Parse(jsonResponse);
+            return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString()!;
+        }
 
-        string jsonResponse = await response.Content.ReadAsStringAsync();
-
-        using JsonDocument doc = JsonDocument.Parse(jsonResponse);
-        string contentText = doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString()!;
-
-        return contentText;
     }
 }

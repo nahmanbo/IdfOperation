@@ -1,17 +1,19 @@
-namespace IdfOperation
+namespace IdfOperation.GoodGuys.Firepower
 {
-    public class F16 : Weapon, IFuelable
+    public class Tank : Weapon, IFuelable
     {
-        private int _fuel = 100;
+        private int _fuel = 50;
 
         //====================================
-        public F16(int number)
-            : base($"F16-{number}", 8, new List<string> { "buildings" }, 8) {}
+        public Tank(int number)
+            : base($"Tank-{number}", 40, new List<string> { "open areas" }, 40)
+        {
+        }
 
         //--------------------------------------------------------------
         public void AddFuel()
         {
-            _fuel = 100;
+            _fuel = 50;
         }
 
         //--------------------------------------------------------------
@@ -31,16 +33,16 @@ namespace IdfOperation
         {
             while (true)
             {
-                Console.Write($"You need a {Name}. Enter Bomb weight (0.5 or 1): ");
-                string input = Console.ReadLine().Trim();
+                Console.WriteLine($"You need a {Name}. Select quantity of shell: (2 or 3)");
+                string input = Console.ReadLine()!;
 
                 switch (input)
                 {
-                    case "1":
-                        Ammo -= 1;
+                    case "2":
+                        Ammo -= 2;
                         return;
-                    case "0.5":
-                        Ammo -= 0.5;
+                    case "3":
+                        Ammo -= 3;
                         return;
                     default:
                         Console.WriteLine("Enter a valid number.");
@@ -52,7 +54,10 @@ namespace IdfOperation
         //--------------------------------------------------------------
         public override void PrintInfo()
         {
-            Console.WriteLine($"Name: {Name}, Ammo: {Ammo}/{MaxAmmo}, Effective Against: {string.Join(", ", TargetTypes)}, Fuel: {_fuel} liters");
+            Console.WriteLine(
+                $"Name: {Name}, Ammo: {Ammo}/{MaxAmmo}, " +
+                $"Effective Against: {string.Join(", ", TargetTypes)}, Fuel: {_fuel} liters"
+            );
         }
     }
 }
